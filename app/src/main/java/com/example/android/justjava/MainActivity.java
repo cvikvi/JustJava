@@ -15,7 +15,7 @@ import java.util.Locale;
  */
 public class MainActivity extends AppCompatActivity {
 
-    int quantity = 2;
+    int quantity = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +27,30 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int price = quantity * 5;
+        //int price = quantity * 5;
+
+        int price = calculatePrice();
+
         String priceMessage = "Total: $" + price;
         priceMessage = priceMessage + " \nThank you!";
         // String message = "Item count " + quantity;
         displayMessage(priceMessage);
+
+
     }
+
+    /**
+     * Calculates the price of the order.
+     * *
+     */
+    private int calculatePrice() {
+        int pricePerCup = 5;
+        int price = quantity * pricePerCup;
+
+        return price;
+
+    }
+
 
     /**
      * This method is called when the plus button is clicked.
@@ -41,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     public void increment(View view) {
 
         quantity = quantity + 1;
-        display(quantity);
+        displayQuantity(quantity);
 
     }
 
@@ -51,14 +69,15 @@ public class MainActivity extends AppCompatActivity {
     public void decrement(View view) {
 
         quantity = quantity - 1;
-        display(quantity);
+        displayQuantity(quantity);
 
     }
+
     /**
      * This method displays the given quantity value on the screen.
      */
 
-    private void display(int number) {
+    private void displayQuantity(int number) {
 
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
@@ -82,5 +101,9 @@ public class MainActivity extends AppCompatActivity {
     private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(message);
+
+
     }
+
+
 }
